@@ -20,9 +20,9 @@ AddEventHandler("taxi:chargeFullPrice", function(preco)
 
     if xPlayer.getAccount('bank').money >= preco then
         xPlayer.removeAccountMoney('bank', preco)
-        TriggerClientEvent('esx:showNotification', _source, "Você foi cobrado pelo valor total da viagem: $" .. preco)
+        TriggerClientEvent('esx:showNotification', _source, "$" .. preco .. "were removed from your account!" )
     else
-        TriggerClientEvent('esx:showNotification', _source, "Você não tem dinheiro suficiente para pagar a viagem!")
+        TriggerClientEvent('esx:showNotification', _source, "You do not have enough money!")
     end
 end)
 -- Made with ❤️ by noahpombas.ch
