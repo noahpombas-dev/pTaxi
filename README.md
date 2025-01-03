@@ -7,7 +7,7 @@ A simple and efficient taxi system for FiveM servers that works with both **ESX*
 
 ## ✨ Features
 
-- **📞 Call a Taxi:** Use the `/chamarTaxi` command to spawn a taxi on the nearest road. 🛣️
+- **📞 Call a Taxi:** Use the `/callTaxi` command to spawn a taxi on the nearest road. 🛣️
 - **📍 Waypoint Navigation:** Set a waypoint on the map for the taxi to drive to. 🗺️
 - **💸 Fair Pricing:** Pay the full fare, even if you exit the taxi before reaching your destination.
 - **🤖 Immersive Interaction:** The taxi waits for you to enter and starts the ride once you're inside.
@@ -44,7 +44,7 @@ ensure pTaxi-qbcore
 ## 🎮 Usage
 
 1. **🚕 Call a Taxi:**  
-   Use `/chamarTaxi` in chat to summon a taxi.  
+   Use `/callTaxi` in chat to summon a taxi.  
    🛣️ The taxi spawns at the nearest road and waits for you to enter.
 
 2. **📍 Set a Destination:**  
