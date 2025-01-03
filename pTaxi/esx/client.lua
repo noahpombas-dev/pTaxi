@@ -13,7 +13,7 @@ end
 local lastTaxiCallTime = nil
 local cooldownTime = Pombas.delay * 60
 
-RegisterCommand("chamarTaxi", function(source, args, rawCommand)
+RegisterCommand("callTaxi", function(source, args, rawCommand)
     SetWaypointOff()
     local currentTime = GetGameTimer() / 1000
     local ped = PlayerPedId()
@@ -22,7 +22,7 @@ RegisterCommand("chamarTaxi", function(source, args, rawCommand)
     if lastTaxiCallTime ~= nil and (currentTime - lastTaxiCallTime < cooldownTime) then
         local remainingTime = cooldownTime - (currentTime - lastTaxiCallTime)
         local time = math.floor(remainingTime / 60)
-        TriggerEvent("chat:addMessage", { args = { "^1Táxi ", "Você precisa esperar " .. time .. " minutos para chamar outro táxi!" } })
+        TriggerEvent("chat:addMessage", { args = { "^1Taxi ", "You need to wait " .. time .. " minutes to call another taxi!" } })
         return
     end
 
@@ -36,7 +36,7 @@ end)
 RegisterNetEvent("taxi:saldoVerificado")
 AddEventHandler("taxi:saldoVerificado", function(temSaldo)
     if not temSaldo then
-        TriggerEvent("chat:addMessage", { args = { "^1Táxi", "Você não tem dinheiro suficiente no banco!" } })
+        TriggerEvent("chat:addMessage", { args = { "^1Taxi", "You do not have enough money!" } })
         return
     end
 
@@ -100,7 +100,7 @@ AddEventHandler("taxi:saldoVerificado", function(temSaldo)
     end
 
     -- Solicitar que o jogador marque um destino no mapa
-    TriggerEvent("chat:addMessage", { args = { "^2Táxi", "Por favor, marque o destino no mapa!" } })
+    TriggerEvent("chat:addMessage", { args = { "^2Táxi", "Please make a new Waypoint!" } })
     local destinoMarcado = false
     local waypointCoords = nil
 
@@ -146,7 +146,7 @@ AddEventHandler("taxi:saldoVerificado", function(temSaldo)
     local distancia = #(playerCoords - spawnCoords)
     local preco = math.floor(distancia * Pombas.price)
     
-    TriggerEvent("chat:addMessage", { args = { "^2Táxi", "Destino marcado! Custo estimado: $" .. preco } })
+    TriggerEvent("chat:addMessage", { args = { "^2Táxi", "Waypoint marked! Estimated Fare: $" .. preco } })
     
 
     TaskVehicleDriveToCoord(driver, taxi, spawnCoords.x, spawnCoords.y, spawnCoords.z, 5000.0, 0, GetEntityModel(taxi), 2883621, 1.0, true)
@@ -163,7 +163,7 @@ AddEventHandler("taxi:saldoVerificado", function(temSaldo)
         if isPassenger == 0 then
             if playerExited == 0 then
                 playerExited = 1
-                TriggerEvent("chat:addMessage", { args = { "^1Táxi", "Destino cancelado!" } })
+                TriggerEvent("chat:addMessage", { args = { "^1Táxi", "Destination Canceled!" } })
                 TriggerServerEvent('taxi:chargeFullPrice', preco)  
                 Wait(3000) 
                 DeleteVehicle(taxi)
@@ -176,7 +176,7 @@ AddEventHandler("taxi:saldoVerificado", function(temSaldo)
         if distancia < 10.0 and not arrivedAtDestination then 
                 arrivedAtDestination = true 
                 playerExited = 1
-                TriggerEvent("chat:addMessage", { args = { "^1Táxi", "Chegou ao seu Destino!" } })
+                TriggerEvent("chat:addMessage", { args = { "^1Táxi", "You arrived at your destination!" } })
                 TriggerServerEvent('taxi:chargeFullPrice', preco)  
                 TaskLeaveVehicle(PlayerPedId(), taxi, 0)
                 Wait(3000) 
