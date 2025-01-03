@@ -5,11 +5,11 @@ local lastTaxiCallTime = nil
 local cooldownTime = Pombas.delay * 60
 
 -- Command to call a taxi
-RegisterCommand("chamarTaxi", function()
+RegisterCommand("callTaxi", function()
     local currentTime = GetGameTimer() / 1000
     if lastTaxiCallTime and (currentTime - lastTaxiCallTime < cooldownTime) then
         local remainingTime = cooldownTime - (currentTime - lastTaxiCallTime)
-        QBCore.Functions.Notify("Espere " .. math.floor(remainingTime / 60) .. " minutos para chamar outro táxi.", "error")
+        QBCore.Functions.Notify("Wait " .. math.floor(remainingTime / 60) .. "minutes to call another taxi.", "error")
         return
     end
 
@@ -21,7 +21,7 @@ end)
 RegisterNetEvent("taxi:saldoVerificado")
 AddEventHandler("taxi:saldoVerificado", function(hasBalance)
     if not hasBalance then
-        QBCore.Functions.Notify("Você não tem dinheiro suficiente no banco.", "error")
+        QBCore.Functions.Notify("You do not have enough money.", "error")
         return
     end
 
@@ -93,7 +93,7 @@ AddEventHandler("taxi:saldoVerificado", function(hasBalance)
     end
 
 
-    QBCore.Functions.Notify("Por favor, marque um destino no mapa!.", "warning")
+    QBCore.Functions.Notify("Please mark a destination on the map!", "warning")
 
     local destinoMarcado = false
     local waypointCoords = nil
@@ -124,7 +124,7 @@ AddEventHandler("taxi:saldoVerificado", function(hasBalance)
                 TaskEnterVehicle(ped, taxi, -1, 1, 1.0, 1, 0)
             else
               
-                QBCore.Functions.Notify("Aproxime-se do táxi para entrar!", "info")
+                QBCore.Functions.Notify("Approach the taxi to get in!", "info")
                 Wait(1000)
             end
         end
@@ -181,7 +181,7 @@ AddEventHandler("taxi:saldoVerificado", function(hasBalance)
         if isPassenger == 0 then
             if playerExited == 0 then
                 playerExited = 1
-                QBCore.Functions.Notify("Destino cancelado!.", "error")
+                QBCore.Functions.Notify("Destination canceled", "error")
                 TriggerServerEvent("taxi:charge", preco)
                 Wait(3000) 
                 DeleteVehicle(taxi)
@@ -193,7 +193,7 @@ AddEventHandler("taxi:saldoVerificado", function(hasBalance)
         if distancia < 10.0 and not arrivedAtDestination then 
             arrivedAtDestination = true 
             playerExited = 1
-            QBCore.Functions.Notify("Chegou ao seu Destino!", "error")
+            QBCore.Functions.Notify("You arrived at your Destination!", "error")
             TriggerServerEvent("taxi:charge", preco)
             TaskLeaveVehicle(PlayerPedId(), taxi, 0)
             Wait(3000) 
