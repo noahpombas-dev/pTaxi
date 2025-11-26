@@ -1,5 +1,5 @@
 
-# 🚖 Taxi Script for ESX and QBCore
+# 🚖 Taxi Script for ESX and QBCore !
 
 A simple and efficient taxi system for FiveM servers that works with both **ESX** and **QBCore** frameworks. This script allows players to call a taxi 🚕, set a waypoint 📍, and enjoy an immersive ride. The taxi waits patiently 🕒, takes you to your destination, and ensures you pay the fare 💰—even if you decide to hop off early! 
 
